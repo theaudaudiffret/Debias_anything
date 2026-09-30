@@ -50,18 +50,26 @@ command line, is relative to it.
 
 ## Checkpoints and data
 
-Place the checkpoints in `checkpoints/`:
+The checkpoints trained for the paper are on the Hugging Face hub,
+[theau12345/debias-anything](https://huggingface.co/theau12345/debias-anything). Download them into
+`checkpoints/`:
+
+```bash
+uv run hf download theau12345/debias-anything --local-dir checkpoints
+```
+
+and add the two third-party checkpoints, which are not redistributed:
 
 | file | what it is | source |
 |---|---|---|
-| `celeba_edm_64.pth` | EDM model trained on CelebA 64×64 (Appendix B.1) | released with the paper |
-| `celeba_adapter.pth` | adapter of the CelebA model | released with the paper |
-| `celeba_gender_classifier.pt`, `celeba_eyeglasses_classifier.pt` | classifiers that count the attributes on CelebA (B.5) | released with the paper |
-| `celeba_classifier_characteristics.csv` | their per-class validation accuracies, the CLEAM alphas, one row per checkpoint (SHA-256) | released with the paper |
-| `celebahq_p2_adapter.pt` | adapter of P2 | released with the paper |
-| `celebahq_evaluators/{gender,eyeglasses,race}/` | ResNet-18 evaluators of CelebA-HQ (B.5) | released with the paper |
-| `celebahq_evaluators/recalls.{csv,json}` | their per-class validation recalls, the CLEAM alphas of Table 2 | released with the paper, or `scripts/p2/evaluate_evaluators.py` |
-| `sd15_adapter.pth` | adapter of Stable Diffusion 1.5 | released with the paper |
+| `celeba_edm_64.pth` | EDM model trained on CelebA 64×64 (Appendix B.1) | [HF](https://huggingface.co/theau12345/debias-anything) |
+| `celeba_adapter.pth` | adapter of the CelebA model | [HF](https://huggingface.co/theau12345/debias-anything) |
+| `celeba_gender_classifier.pt`, `celeba_eyeglasses_classifier.pt` | classifiers that count the attributes on CelebA (B.5) | [HF](https://huggingface.co/theau12345/debias-anything) |
+| `celeba_classifier_characteristics.csv` | their per-class validation accuracies, the CLEAM alphas, one row per checkpoint (SHA-256) | [HF](https://huggingface.co/theau12345/debias-anything) |
+| `celebahq_p2_adapter.pt` | adapter of P2 | [HF](https://huggingface.co/theau12345/debias-anything) |
+| `celebahq_evaluators/{gender,eyeglasses,race}/` | ResNet-18 evaluators of CelebA-HQ (B.5) | [HF](https://huggingface.co/theau12345/debias-anything) |
+| `celebahq_evaluators/recalls.{csv,json}` | their per-class validation recalls, the CLEAM alphas of Table 2 | [HF](https://huggingface.co/theau12345/debias-anything), or `scripts/p2/evaluate_evaluators.py` |
+| `sd15_adapter.pth` | adapter of Stable Diffusion 1.5 | [HF](https://huggingface.co/theau12345/debias-anything) |
 | `celebahq_p2.pt` | P2 CelebA-HQ model (Choi et al., 2022) | [P2 weighting](https://github.com/jychoi118/P2-weighting) |
 | `fairface/res34_fair_align_multi_7_20190809.pt` | FairFace classifier (Kärkkäinen & Joo, 2021) | [FairFace](https://github.com/dchen236/FairFace) |
 
