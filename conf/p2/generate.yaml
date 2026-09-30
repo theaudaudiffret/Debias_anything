@@ -1,0 +1,48 @@
+# Copyright 2026 Théau d'Audiffret, Mariia Vladimirova, Jean-Yves Franceschi
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Guided DDIM sampling of P2 on CelebA-HQ 256x256 (Table 2). Defaults of the script; the settings
+# of the four "Debias Anything" rows are in scripts/p2/generate_and_evaluate.sh.
+#   uv run python scripts/p2/generate.py out=... source_prompt=... target_prompt=... [overrides...]
+
+defaults:
+  - p2_generate_schema
+  - _self_
+
+out: null # required
+p2_checkpoint: checkpoints/celebahq_p2.pt
+projector_checkpoint: checkpoints/celebahq_p2_adapter.pt
+source_prompt: null
+target_prompt: null
+target_proportion: 0.5
+class_prompts: null
+class_proportions: null
+n_images: 100
+batch_size: 8
+guidance_weight: 1.0
+n_ddim_steps: 50
+eta: 0.0
+seed: 42
+per_sample_noise_seeds: false
+siglip: null
+diversity: false
+diversity_weight: 1.0
+perturb_proj: false
+perturb_proj_weight: 1.0
+perturb_sigma: 0.5
+perturb_seed: 42
+minority_t_min: 0
+minority_t_max: 1000
+minority_every_n: 1
+guidance_timestep_max: null

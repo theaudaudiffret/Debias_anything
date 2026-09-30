@@ -1,0 +1,39 @@
+# Copyright 2026 Théau d'Audiffret, Mariia Vladimirova, Jean-Yves Franceschi
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Sampling + evaluation of the CelebA 64x64 EDM model (Appendix D of the paper).
+#   uv run python scripts/celeba/sample_and_evaluate.py [overrides...]
+# The per-table sweeps are in scripts/celeba/. Paths are relative to the repository root.
+
+defaults:
+  - celeba_sample_and_evaluate_schema
+  - sampler: deterministic
+  - guidance: batched_text
+  - _self_
+
+model_path: checkpoints/celeba_edm_64.pth
+n_batches: 50
+batch_size: 100
+n_real_train: 5000
+n_steps: 100
+dataloader_kind: celeba_balanced
+seed: 42
+imsize: 64
+channels: 3
+projector_path: checkpoints/celeba_adapter.pth
+target_prompt: "a photo of a man"
+source_prompt: "a photo of a woman"
+siglip_path: google/siglip2-base-patch16-224
+per_class: true
+monge: true

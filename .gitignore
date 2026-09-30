@@ -1,0 +1,36 @@
+# Large or generated files: checkpoints and data are downloaded or produced by the scripts.
+checkpoints/*
+# ...except the calibrations of the released classifiers (CLEAM alphas), which are small
+!checkpoints/celeba_classifier_characteristics.csv
+!checkpoints/celebahq_evaluators/
+checkpoints/celebahq_evaluators/*/
+data/
+outputs/
+result_metrics/
+tests/
+# Baselines are run from their own repositories
+baselines/
+logs/
+multirun/
+mlruns/
+mlflow.db*
+
+# DiffLens has no license: clone it outside this repository (eval/difflens/README.md)
+DiffLens/
+ICM/
+*.pt
+*.pth
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store

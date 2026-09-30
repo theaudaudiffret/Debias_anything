@@ -1,0 +1,42 @@
+# Copyright 2026 Théau d'Audiffret, Mariia Vladimirova, Jean-Yves Franceschi
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# ResNet-18 evaluator of the Balancing Act protocol on CelebA-HQ (Appendix B.5): ImageNet
+# initialisation, class-stratified 80/10/10 split, Adam lr 1e-3, batch 64, 5 epochs, fp32.
+#   uv run python scripts/p2/train_evaluator.py attribute=... output_dir=... [annotations=...]
+
+defaults:
+  - p2_evaluator_schema
+  - _self_
+
+attribute: ??? # gender, eyeglasses or race
+images_dir: data/celebahq/CelebAMask-HQ/CelebA-HQ-img
+annotations: null # CelebAMask-HQ-attribute-anno.txt, for gender and eyeglasses
+output_dir: ???
+seed: 42
+epochs: 5
+batch_size: 64
+learning_rate: 0.001
+weight_decay: 0.0
+workers: 4
+device: cuda
+train_fraction: 0.8
+val_fraction: 0.1
+clip_model: ViT-B/32
+race_prompt: a black person
+clip_batch_size: 128
+scores_cache: null
+imagenet_pretrained: true
+amp: false
+overwrite: false

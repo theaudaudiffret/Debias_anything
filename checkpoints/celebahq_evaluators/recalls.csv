@@ -1,0 +1,4 @@
+attribute,num_images,accuracy,balanced_accuracy,f1_macro,recall_class_0,recall_class_1,class_0,class_1,interpretation
+gender,2999,0.9816605448722839,0.9788830280303955,0.9802404642105103,0.9894403219223022,0.9683257937431335,Female,Male,Accuracy on the saved CelebA-HQ validation split used for checkpoint selection; the test split remains the held-out metric.
+eyeglasses,2999,0.9966655373573303,0.982000470161438,0.982000470161438,0.9982474446296692,0.965753436088562,No eyeglasses,Eyeglasses,Accuracy on the saved CelebA-HQ validation split used for checkpoint selection; the test split remains the held-out metric.
+race,400,0.9175000190734863,0.9175000190734863,0.9173134565353394,0.9649999737739563,0.8700000047683716,White,Black,FairFace agreement on validation-set CLIP extremes; not demographic ground-truth race accuracy.

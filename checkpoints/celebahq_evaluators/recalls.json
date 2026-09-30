@@ -1,0 +1,150 @@
+{
+  "protocol": "celebahq_validation_classifier_evaluation_v1",
+  "caveat": "Gender and Eyeglasses use the validation splits that selected their best checkpoints, not the held-out test splits. Race measures FairFace agreement on 200 low and 200 high CLIP-similarity validation images and is not demographic ground-truth accuracy.",
+  "classifiers": {
+    "gender": {
+      "images_dir": "data/celebahq/CelebAMask-HQ/CelebA-HQ-img",
+      "split": "validation",
+      "split_manifest": "checkpoints/celebahq_evaluators/gender/manifest.json",
+      "checkpoint": "checkpoints/celebahq_evaluators/gender/best.pt",
+      "checkpoint_sha256": "288af1cb76caa5d753af449d7fbc9bfee2fe187e92e5ea24116854e4de9f918f",
+      "architecture": "resnet18",
+      "preprocess": "imagenet",
+      "class_names": [
+        "Female",
+        "Male"
+      ],
+      "label_source": "CelebA-HQ Male annotation",
+      "interpretation": "Accuracy on the saved CelebA-HQ validation split used for checkpoint selection; the test split remains the held-out metric.",
+      "classifier_class_order": [
+        "Female",
+        "Male"
+      ],
+      "classifier_attribute": "gender",
+      "classifier_label_source": "CelebAMask-HQ annotation Male",
+      "num_images": 2999,
+      "accuracy": 0.9816605448722839,
+      "balanced_accuracy": 0.9788830280303955,
+      "f1_macro": 0.9802404642105103,
+      "recall_per_class": [
+        0.9894403219223022,
+        0.9683257937431335
+      ],
+      "confusion_true_rows_pred_columns": [
+        [
+          1874,
+          20
+        ],
+        [
+          35,
+          1070
+        ]
+      ],
+      "mean_softmax_probs": [
+        0.6354817304708871,
+        0.3645182721076522
+      ],
+      "hard_probs": [
+        0.6365455151717239,
+        0.3634544848282761
+      ]
+    },
+    "eyeglasses": {
+      "images_dir": "data/celebahq/CelebAMask-HQ/CelebA-HQ-img",
+      "split": "validation",
+      "split_manifest": "checkpoints/celebahq_evaluators/eyeglasses/manifest.json",
+      "checkpoint": "checkpoints/celebahq_evaluators/eyeglasses/best.pt",
+      "checkpoint_sha256": "05c714dba50d212e6353e8cdfd0a774daa72863a3501a8172876af67914399b5",
+      "architecture": "resnet18",
+      "preprocess": "imagenet",
+      "class_names": [
+        "No eyeglasses",
+        "Eyeglasses"
+      ],
+      "label_source": "CelebA-HQ Eyeglasses annotation",
+      "interpretation": "Accuracy on the saved CelebA-HQ validation split used for checkpoint selection; the test split remains the held-out metric.",
+      "classifier_class_order": [
+        "No eyeglasses",
+        "Eyeglasses"
+      ],
+      "classifier_attribute": "eyeglasses",
+      "classifier_label_source": "CelebAMask-HQ annotation Eyeglasses",
+      "num_images": 2999,
+      "accuracy": 0.9966655373573303,
+      "balanced_accuracy": 0.982000470161438,
+      "f1_macro": 0.982000470161438,
+      "recall_per_class": [
+        0.9982474446296692,
+        0.965753436088562
+      ],
+      "confusion_true_rows_pred_columns": [
+        [
+          2848,
+          5
+        ],
+        [
+          5,
+          141
+        ]
+      ],
+      "mean_softmax_probs": [
+        0.9508266356380844,
+        0.04917336683361862
+      ],
+      "hard_probs": [
+        0.9513171057019006,
+        0.04868289429809937
+      ]
+    },
+    "race": {
+      "images_dir": "data/celebahq/CelebAMask-HQ/CelebA-HQ-img",
+      "split": "validation",
+      "split_manifest": "checkpoints/celebahq_evaluators/race/manifest.json",
+      "checkpoint": "checkpoints/fairface/res34_fair_align_multi_7_20190809.pt",
+      "checkpoint_sha256": "37f2e74c0e7da196f8edd7dae0c88cffdbef7923beebebcc27381f0ad0fdb2c1",
+      "architecture": "fairface_white_black",
+      "preprocess": "fairface",
+      "class_names": [
+        "White",
+        "Black"
+      ],
+      "label_source": "200 lowest and 200 highest OpenAI CLIP ViT-B/32 similarities to 'a black person' within the saved Race validation split",
+      "interpretation": "FairFace agreement on validation-set CLIP extremes; not demographic ground-truth race accuracy.",
+      "classifier_class_order": [
+        "White",
+        "Black"
+      ],
+      "classifier_note": "Public FairFace proxy; not Balancing Act's unreleased CelebA-HQ ResNet-18 evaluator.",
+      "num_images": 400,
+      "accuracy": 0.9175000190734863,
+      "balanced_accuracy": 0.9175000190734863,
+      "f1_macro": 0.9173134565353394,
+      "recall_per_class": [
+        0.9649999737739563,
+        0.8700000047683716
+      ],
+      "confusion_true_rows_pred_columns": [
+        [
+          193,
+          7
+        ],
+        [
+          26,
+          174
+        ]
+      ],
+      "mean_softmax_probs": [
+        0.5579471571571856,
+        0.44205284427690195
+      ],
+      "hard_probs": [
+        0.5475,
+        0.4525
+      ],
+      "clip_score_boundaries": {
+        "low_similarity_max": 0.18287909030914307,
+        "high_similarity_min": 0.2308947890996933
+      }
+    }
+  }
+}

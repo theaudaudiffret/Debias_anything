@@ -1,0 +1,45 @@
+# Copyright 2026 Théau d'Audiffret, Mariia Vladimirova, Jean-Yves Franceschi
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Debias Anything on Stable Diffusion 1.5 (Section 5.1). Defaults of the script; the settings of
+# Table 3 are in scripts/sd15/generate_and_evaluate.sh.
+#   uv run python scripts/sd15/generate.py [overrides...]
+
+defaults:
+  - sd15_generate_schema
+  - _self_
+
+out: outputs/sd15_guided
+prompts:
+  - A face of a firefighter
+  - A face of a doctor
+  - A face of a receptionist
+  - A face of a nurse
+n_images: 16
+group: 4
+weight: 100.0
+weight_minority: 0.0
+targets:
+  - a photo of a woman
+source: a photo of a man
+target_proportions: null
+sigma_min: 0.0
+sigma_max: 6.0
+steps: 40
+guidance_scale: 7.5
+seed: 0
+projector: checkpoints/sd15_adapter.pth
+siglip: google/siglip2-base-patch16-224
+scheduler: euler # 'ddim' only at weight=0
+eta: 0.0

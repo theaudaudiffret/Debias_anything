@@ -1,0 +1,3 @@
+classifier_name,sac_checkpoint_hash,validation_set,n_samples_class0,n_samples_class1,accuracy,proba_0,proba_1
+celeba_eyeglasses_classifier,7ead306a67b2d35ebea9026d065f758433c2c1b549c71efade922d33d4b832db,CelebA split=valid,18484,1383,0.9954698746665325,0.9965375661849976,0.9812002778053284
+celeba_gender_classifier,2edb76f3885757df64d85f73d58b54d8ad01e9e6aca45c3ebaea7a7d6f3d8c76,CelebA split=valid,11409,8458,0.9877686615996376,0.987203061580658,0.9885315895080566

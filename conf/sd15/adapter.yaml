@@ -1,0 +1,59 @@
+# Copyright 2026 Théau d'Audiffret, Mariia Vladimirova, Jean-Yves Franceschi
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Adapter of Stable Diffusion 1.5 (Appendix C, Table 4): mid_block + the four decoder blocks of the
+# prompt-conditioned branch, 21.2 M parameters, 50 epochs (the kept epoch is the one of best
+# validation R@1), AdamW lr 5e-4 with 3 warm-up epochs then cosine, weight decay 0.05, batch 64,
+# two independent noise levels per image, sigma uniform on the whole SD 1.5 range.
+#   uv run python scripts/sd15/train_adapter.py
+
+defaults:
+  - sd15_adapter_schema
+  - _self_
+
+cache: data/sd15_adapter_cache
+out: checkpoints/sd15_adapter.pth
+
+mlflow:
+  experiment_name: hspace_to_siglip_sd15_decoder
+
+resolution: 512
+epochs: 50
+lr: 5.0e-04
+warmup_epochs: 3
+weight_decay: 0.05
+batch_size: 64
+m_views: 2
+sigma_min: null # null -> 0.029 (sigma_min of the scheduler)
+sigma_max: null # null -> 14.615 (sigma_max of the scheduler)
+
+blocks:
+  - mid_block # (1280, 8, 8)
+  - up_blocks.0 # (1280, 16, 16)
+  - up_blocks.1 # (1280, 32, 32)
+  - up_blocks.2 # (640, 64, 64)
+  - up_blocks.3 # (320, 64, 64)
+projection_dim: 512
+
+pool_dim: 512
+attn_heads: 8
+n_blocks: 6
+mlp_ratio: 2.0
+dropout: 0.1
+time_dim: 128
+
+n_val: 1000
+
+log_every: 50
+device: null

@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "debias-anything"
+version = "0.1.0"
+description = "Debias Anything: fairness with diversity without supervision in diffusion models"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE", "src/debias_anything/models/third_party/guided_diffusion/LICENSE"]
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "torch>=2.13",
+    "torchvision>=0.28",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "scikit-learn>=1.4",
+    "pandas>=2.0",
+    "matplotlib>=3.8",
+    "tqdm>=4.66",
+    "pyyaml>=6.0",
+    "hydra-core>=1.3.4",
+    "mlflow>=2.13",
+    "transformers>=5.14",
+    "diffusers>=0.39.0",
+    "datasets>=4.8.4",
+    "lpips>=0.1.4",
+    "clean-fid>=0.1.35",
+    "pytorch-fid>=0.3.0",
+    "torchmetrics>=1.0",
+    "vendi-score>=0.0.3",
+    "openai-clip>=1.0.1",
+    "setuptools<82",  # openai-clip imports pkg_resources, removed in setuptools 82
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=3.7",
+    "ruff>=0.4",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# The paper's runs used torch 2.13 with CUDA 13.0 wheels, taken from this index on Linux; elsewhere
+# torch comes from PyPI. For another CUDA version, change the URL (e.g. .../whl/cu128).
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu130", marker = "sys_platform == 'linux'" }]
+torchvision = [{ index = "pytorch-cu130", marker = "sys_platform == 'linux'" }]
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+extend-exclude = ["src/debias_anything/models/third_party"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
