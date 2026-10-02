@@ -1,12 +1,16 @@
 # Debias Anything: Fairness with Diversity without Supervision in Diffusion Models
 
-Code of the paper. Debias Anything sets the proportions of a sensitive attribute, described by a
+Official implementation of the paper _Debias Anything: Fairness with Diversity without Supervision in Diffusion Models_ (Théau d'Audiffret, Mariia Vladimirova, Jean-Yves Franceschi).
+
+Debias Anything sets the proportions of a sensitive attribute, described by a
 few sentences, in the samples of a pretrained diffusion model, with no attribute label and no
 retraining of the generator. An adapter, trained once per generator, maps the h-space of the frozen
 denoiser to the embedding space of SigLIP 2 (Section 4.1); pairs of sentences give the attribute
 directions, and an optimal batch assignment guides each image towards a value (Section 4.2); a
 second term, computed with the same adapter, restores the diversity that guidance removes
 (Section 4.3).
+
+## [Preprint](https://arxiv.org/abs/2610.01815)
 
 ## Contents
 
